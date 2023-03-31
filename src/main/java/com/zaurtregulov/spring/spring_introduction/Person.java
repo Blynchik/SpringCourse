@@ -16,7 +16,7 @@ public class Person {
     private String surname;
 
 //    @Value("33")
-//    @Value("${person.age}")
+    @Value("${person.age}")
     private int age;
 
 //    @Autowired
