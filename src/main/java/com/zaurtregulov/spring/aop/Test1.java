@@ -10,13 +10,15 @@ public class Test1 {
         UniLibrary library = context.getBean("uniLibrary", UniLibrary.class);
 //        library.getBook("Словарь");
 //        Book book = context.getBean("book", Book.class);
-//        library.getBook(book);
+        library.getBook();
         library.returnBook();
         library.getMagazine();
+        library.returnMagazine();
+        library.addBook();
 
-        SchoolLibrary schoolLibrary = context.getBean("schoolLibrary",
-                SchoolLibrary.class);
-        schoolLibrary.getBook();
+//        SchoolLibrary schoolLibrary = context.getBean("schoolLibrary",
+//                SchoolLibrary.class);
+//        schoolLibrary.getBook();
 
         context.close();
     }

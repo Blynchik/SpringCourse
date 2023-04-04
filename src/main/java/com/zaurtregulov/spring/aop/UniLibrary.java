@@ -24,15 +24,27 @@ public class UniLibrary extends AbstractLibrary {
         System.out.println("Возвращаем книгу в UniLibrary");
     }
 
-    public void getMagazine() {
+    public void getMagazine( ) {
         System.out.println("Мы берем журнал из UniLibrary");
     }
 
-    public void getBook(String bookName) {
-        System.out.println("Мы берем книгу из UniLibrary " + bookName);
+    public void returnMagazine(){
+        System.out.println("Возвращаем журнал в UniLibrary");
     }
 
-    public void getBook(Book book){
-        System.out.println("Мы берем " + book.getName());
+    public void addBook(){
+        System.out.println("Добавляем книгу в UniLibrary");
     }
+
+    public void addMagazine(){
+        System.out.println("Добавляем журнал в UniLibrary");
+    }
+
+//    public void getBook(String bookName) {
+//        System.out.println("Мы берем книгу из UniLibrary " + bookName);
+//    }
+//
+//    public void getBook(Book book){
+//        System.out.println("Мы берем " + book.getName());
+//    }
 }
