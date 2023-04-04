@@ -2,29 +2,15 @@ package com.zaurtregulov.spring.aop.aspect;
 
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 @Component
 @Aspect
-public class LoggingAndSecurityAspect {
+@Order(1)
+public class LoggingAspect {
 
-    @Pointcut("execution(* com.zaurtregulov.spring.aop.UniLibrary.*(..))")
-    private void allMethodFromUniLibrary() {
-    }
-
-    @Pointcut("execution (public void com.zaurtregulov.spring.aop.UniLibrary.returnMagazine())")
-    private void returnMagazineFromUniLibrary() {
-    }
-
-    @Pointcut("allMethodFromUniLibrary() && !returnMagazineFromUniLibrary()")
-    private void allMethodsExceptReturnMagazineFromUniLibrary(){
-    }
-
-    @Before("allMethodsExceptReturnMagazineFromUniLibrary()")
-    public void beforeAllMethodsExceptReturnMagazineAdvice(){
-        System.out.println("Log 100");
-    }
+//
 
 //    @Pointcut("execution(* com.zaurtregulov.spring.aop.UniLibrary.get*())")
 //    private void allGetMethodsFromUniLibrary() {
@@ -52,10 +38,6 @@ public class LoggingAndSecurityAspect {
 //    public void beforeGetAndReturnLoggingAdvice() {
 //        System.out.println("Log 3");
 //    }
-
-//    @Pointcut("execution(* get*())")
-//    private void allGetMethods() {
-//    }
 //
 //    //        @Before("execution(public void getBook(String))")
 ////    @Before("execution(public void *(*))")
@@ -65,10 +47,10 @@ public class LoggingAndSecurityAspect {
 ////    @Before("execution(public void get*())")
 ////    @Before("execution(* get*())")
 //
-//    @Before("allGetMethods()")
-//    public void beforeGetLoggingAdvice() {
-//        System.out.println("Попытка получить книгу/журнал");
-//    }
+    @Before("com.zaurtregulov.spring.aop.aspect.MyPointcuts.allGetMethods()")
+    public void beforeGetLoggingAdvice() {
+        System.out.println("Попытка получить книгу/журнал");
+    }
 //
 //    //    @Before("execution(public void returnBook())")
 ////    @Before("execution(public * returnBook())")
@@ -78,8 +60,4 @@ public class LoggingAndSecurityAspect {
 //    }
 //
 //    //    @Before("execution(* get*())")
-//    @Before("allGetMethods()")
-//    public void beforeGetSecurityAdvice() {
-//        System.out.println("Проверка прав");
-//    }
 }
