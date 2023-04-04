@@ -1,7 +1,10 @@
 package com.zaurtregulov.spring.aop.aspect;
 
+import com.zaurtregulov.spring.aop.Book;
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +15,7 @@ public class LoggingAspect {
 
 //
 
-//    @Pointcut("execution(* com.zaurtregulov.spring.aop.UniLibrary.get*())")
+    //    @Pointcut("execution(* com.zaurtregulov.spring.aop.UniLibrary.get*())")
 //    private void allGetMethodsFromUniLibrary() {
 //    }
 //
@@ -47,8 +50,28 @@ public class LoggingAspect {
 ////    @Before("execution(public void get*())")
 ////    @Before("execution(* get*())")
 //
-    @Before("com.zaurtregulov.spring.aop.aspect.MyPointcuts.allGetMethods()")
-    public void beforeGetLoggingAdvice() {
+    @Before("com.zaurtregulov.spring.aop.aspect.MyPointcuts.allAddMethods()")
+    public void beforeAddLoggingAdvice(JoinPoint joinPoint) {
+        MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
+
+        System.out.println("methodSignature " + methodSignature);
+        System.out.println("methodSignature.getMethod() " + methodSignature.getMethod());
+        System.out.println("methodSignature.getReturnType() " + methodSignature.getReturnType());
+        System.out.println("methodSignature.getName() " + methodSignature.getName());
+
+        if (methodSignature.getName().equals("addBook")) {
+            Object[] arguments = joinPoint.getArgs();
+            for (Object obj : arguments) {
+                if (obj instanceof Book) {
+                    Book myBook = (Book) obj;
+                    System.out.println("Информация о книге: название: " + myBook.getName() + " автор " + myBook.getAuthor() + " год издания " + myBook.getYearOfPublication());
+                }
+                else if(obj instanceof  String){
+                    System.out.println("Книгу в библиотеку добавил " + obj);
+                }
+            }
+        }
+
         System.out.println("Попытка получить книгу/журнал");
     }
 //
