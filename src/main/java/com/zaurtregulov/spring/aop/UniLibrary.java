@@ -55,6 +55,7 @@ public class UniLibrary extends AbstractLibrary {
 //    }
 
     public String returnBookName(){
+        int a = 10/0;
         System.out.println("Ищем название");
         return "Война и мир";
     }

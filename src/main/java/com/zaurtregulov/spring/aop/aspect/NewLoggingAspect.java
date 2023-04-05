@@ -14,15 +14,27 @@ public class NewLoggingAspect {
             throws Throwable {
         System.out.println("Начало advice");
 
-        long begin = System.currentTimeMillis();
+//        Object targetMethodResult = null;
+//
+//        try {
+//            targetMethodResult = proceedingJoinPoint.proceed();
+//            targetMethodResult = "Можно поменять название книги";
+//        } catch (Exception e) {
+//            System.out.println("Поймано " + e);
+//            targetMethodResult = "Неизвестная книга";
+//        }
 
-        Object targetMethodResult = proceedingJoinPoint.proceed();
-        targetMethodResult = "Можно поменять название книги";
+        Object targetMethodResult = null;
 
-        long end = System.currentTimeMillis();
+        try {
+            targetMethodResult = proceedingJoinPoint.proceed();
+            targetMethodResult = "Можно поменять название книги";
+        } catch (Exception e) {
+            System.out.println("Поймано " + e);
+            throw e;
+        }
 
         System.out.println("Конец advice");
-        System.out.println("returnBookName выполнился за " + (end - begin) + "ms");
         return targetMethodResult;
     }
 }
