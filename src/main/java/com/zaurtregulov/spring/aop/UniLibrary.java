@@ -53,4 +53,9 @@ public class UniLibrary extends AbstractLibrary {
 //    public void getBook(Book book){
 //        System.out.println("Мы берем " + book.getName());
 //    }
+
+    public String returnBookName(){
+        System.out.println("Ищем название");
+        return "Война и мир";
+    }
 }
