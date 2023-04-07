@@ -1,6 +1,7 @@
 package com.zaurtregulov.spring.hibernate_test2;
 
-import com.zaurtregulov.spring.hibernate_test.entity.Employee;
+import com.zaurtregulov.spring.hibernate_test2.entity.Detail;
+import com.zaurtregulov.spring.hibernate_test2.entity.Employee;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -10,18 +11,35 @@ public class Test1 {
         SessionFactory factory = new Configuration()
                 .configure("hibernate.cfg.xml")
                 .addAnnotatedClass(Employee.class)
+                .addAnnotatedClass(Detail.class)
                 .buildSessionFactory();
 
-        try {
-            Session session = factory.getCurrentSession();
+        Session session = null;
 
-            Employee emp = new Employee("Name", "Surname",
-                    "IT", 5000);
+        try {
+//            Session session = factory.getCurrentSession();
+//
+//            Employee emp = new Employee("Person", "Surname", "IT", 100500);
+//            Detail detail = new Detail("City", "241243", "123@mail.ru");
+//
+//            emp.setEmpDetail(detail);
+//
+//            session.beginTransaction();
+//
+//            session.save(emp);
+//
+//            session.getTransaction().commit();
+
+            session = factory.getCurrentSession();
 
             session.beginTransaction();
-            session.save(emp);
+
+            Employee emp = session.get(Employee.class, 10);
+            System.out.println(emp.getEmpDetail());
+
             session.getTransaction().commit();
         } finally {
+            session.close();
             factory.close();
         }
     }
