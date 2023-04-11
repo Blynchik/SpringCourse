@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name="departments")
+@Table(name = "departments")
 public class Department {
 
     @Id
@@ -16,14 +16,16 @@ public class Department {
     @Column(name = "name")
     private String departmentName;
 
-    @Column(name="max_salary")
+    @Column(name = "max_salary")
     private int maxSalary;
 
     @Column(name = "min_salary")
     private int minSalary;
 
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.DETACH,
-            CascadeType.REFRESH, CascadeType.MERGE}, mappedBy = "department")
+    @OneToMany(cascade = CascadeType.ALL,
+            mappedBy = "department",
+            fetch = FetchType.EAGER)
+//            fetch = FetchType.LAZY)
     private List<Employee> emps;
 
     public Department() {
@@ -35,8 +37,8 @@ public class Department {
         this.minSalary = minSalary;
     }
 
-    public void addEmployeeToDepartment(Employee employee){
-        if(emps == null){
+    public void addEmployeeToDepartment(Employee employee) {
+        if (emps == null) {
             emps = new ArrayList<>();
         }
 
