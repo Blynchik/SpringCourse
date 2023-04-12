@@ -21,14 +21,11 @@ public class Test {
         try {
             session = factory.getCurrentSession();
 
-//            Section section1 = new Section("Football");
-//            Child child1 = new Child("Child1", 5);
-//            Child child2 = new Child("Child2", 6);
-//            Child child3 = new Child("Child3", 7);
+            Section section1 = new Section("Football");
+            Child child1 = new Child("Child1", 5);
+            Child child2 = new Child("Child2", 6);
+            Child child3 = new Child("Child3", 7);
 //
-//            section1.addChildToSection(child1);
-//            section1.addChildToSection(child2);
-//            section1.addChildToSection(child3);
 
 //            Section section1 = new Section("Volleyball");
 //            Section section2 = new Section("Chess");
@@ -42,7 +39,20 @@ public class Test {
 
             session.beginTransaction();
 
-//            session.save(section1);
+            session.save(section1);
+
+            session.save(child1);
+            session.save(child2);
+            session.save(child3);
+
+
+            section1.addChildToSection(child1);
+            section1.addChildToSection(child2);
+            section1.addChildToSection(child3);
+
+            session.save(child1);
+            session.save(child2);
+            session.save(child3);
 
 //            session.save(child1);
 //            session.save(section1);
@@ -54,10 +64,12 @@ public class Test {
 //            System.out.println(section);
 //            System.out.println(section.getChildren());
 
-            Child child = session.get(Child.class, 5);
+//            Child child = session.get(Child.class, 5);
 
-            System.out.println(child);
-            System.out.println(child.getSections());
+//            System.out.println(child);
+//            System.out.println(child.getSections());
+
+//            session.delete(section);
 
             session.getTransaction().commit();
 
